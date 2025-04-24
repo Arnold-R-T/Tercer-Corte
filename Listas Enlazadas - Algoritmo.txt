@@ -1,0 +1,62 @@
+Listas Enlazadas
+Una lista enlazada es una estructura de datos que organiza elementos de forma lineal, 
+donde cada elemento (nodo) contiene un dato y una referencia al siguiente nodo en la 
+lista (puntero). Estas listas son dinámicas, lo que significa que pueden crecer o reducir 
+en tamaño durante la ejecución del programa. Existen tres tipos de listas enlazadas:
+- Lista enlazada simple: Cada nodo tiene una referencia al siguiente nodo.
+- Lista enlazada doble: Cada nodo tiene referencias tanto al siguiente como al nodo anterior, 
+  lo que permite recorrer la lista en ambos sentidos.
+- Lista enlazada circular: El ultimo nodo apunta al primer nodo, creando un ciclo.
+Usos: Las listas enlazadas ofrecen varias ventajas, principalmente la flexibilidad para 
+crecer y reducir su tamaño durante la ejecución (dinamismo), facilidad para insertar y 
+eliminar elementos, y una gestión eficiente de la memoria. Las desventajas de las listas 
+enlazadas incluyen acceso lento a los elementos, mayor consumo de memoria debido a los 
+punteros, y una navegación más compleja que en arreglos.
+
+Ejemplo de algoritmo con una lista enlazada (Una lista de productos de una tienda con sus
+precios)
+
+<?php
+class Nodo {
+    public $dato;
+    public $precio;
+    public $siguiente;
+
+    public function __construct($dato, $precio){
+        $this->dato = $dato;
+        $this->precio = $precio;
+        $this->siguiente = null;
+    }
+}
+
+class listasEnlazadas {
+    public $inicio;
+    public function __construct(){
+        $this->inicio = null;
+    }
+
+    public function insertar($dato, $precio){
+        $nuevoNodo = new Nodo($dato, $precio);
+        $nuevoNodo ->siguiente=$this->inicio;
+        $this->inicio= $nuevoNodo;
+    }
+
+    public function imprimirHTML(){
+        $nuevoDato = $this->inicio;
+        echo "<ul>";
+
+        while($nuevoDato !== null){
+            echo "\n   <li>Producto: ".$nuevoDato->dato." - Precio: ".$nuevoDato->precio."</li>";
+            $nuevoDato=$nuevoDato->siguiente;
+        }
+
+        echo "\n</ul>";
+    }
+}
+
+$listaEnsalada = new listasEnlazadas();
+$listaEnsalada->insertar("Queso", "5000");
+$listaEnsalada->insertar("Galletas", "1000");
+$listaEnsalada->insertar("Pan", "3000");
+$listaEnsalada->imprimirHTML();
+?>
