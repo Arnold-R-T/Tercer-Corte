@@ -1,0 +1,124 @@
+
+Un árbol es una estructura jerárquica que se utiliza para organizar 
+datos de forma que cada elemento (llamado nodo) tenga una relación padre-hijo con otros nodos.
+
+Características principales de un árbol:
+ - Nodo raíz (root): Es el nodo principal del árbol, del cual derivan todos los demás. Solo hay uno.
+ - Nodos hijos: Son los nodos que dependen o descienden de otro nodo.
+ - Nodos hoja (leaf): Son los nodos que no tienen hijos.
+ - Padre: Cada nodo (excepto la raíz) tiene un único padre.
+ - Altura del árbol: Es la longitud del camino más largo desde la raíz hasta una hoja.
+ - Subárboles: Cada nodo con sus hijos puede considerarse un subárbol.
+
+Tipos de árboles:
+ - Árbol binario: Cada nodo puede tener como máximo dos hijos.
+ - Árbol binario de búsqueda (BST): Árbol binario donde el hijo izquierdo es menor que el padre 
+   y el derecho es mayor.
+ - Árbol balanceado: Mantiene equilibrada la altura de los subárboles.
+ - Árbol N-ario: Cada nodo puede tener hasta N hijos.
+ - Árbol de expresiones: Usado para representar expresiones matemáticas.
+
+Los árboles sirven para organizar y manipular información de forma eficiente, especialmente 
+cuando hay una relación jerárquica o cuando se necesita acceder a datos rápidamente, como en base de 
+datos, inteligencia artificial, sistemas de archivos, entre otros.
+
+Estructura de un árbol (árbol binario)
+
+<?php
+	class Nodo {
+	  public $valor;
+	  public $izquierdo;
+	  public $derecho;
+	  
+	  public function __construct($valor){
+	    $this->valor = $valor;
+	    $this->izquierdo = null;
+	    $this->derecho = null;
+	  }
+	}
+	
+	class ArbolBinario {
+	  private $raiz;
+	  
+	  public function __construct(){
+	    $this->raiz = null;
+	  }
+	  
+	  public function insertar($valor){
+	    $this->raiz = $this->insertarRec($this->raiz, $valor);
+	  }
+	  
+	  private function insertarRec($nodo, $valor){
+	    if($nodo === null){
+	      return new Nodo($valor);
+	    }
+	    
+	    if($valor < $nodo->valor){
+	      $nodo->izquierdo = $this->insertarRec($nodo->izquierdo, $valor);
+	    } else if ($valor > $nodo->valor){
+	      $nodo->derecho = $this->insertarRec($nodo->derecho, $valor);
+	    }
+	    
+	    return $nodo;
+	  }
+	  
+	  public function inOrden(){
+	    $this->inOrdenRec($this->raiz); // $nodo->izquierdo);
+	    echo PHP_EOL;
+	  }
+	  
+	  private function inOrdenRec($nodo){
+	    if($nodo !== null){
+	      $this->inOrdenRec($nodo->izquierdo);
+	      echo $nodo->valor . " ";
+	      $this->inOrdenRec($nodo->derecho);
+	    }
+	  }
+	  
+	  public function preOrden(){
+	    $this->preOrdenRec($this->raiz);
+	    echo PHP_EOL;
+	  }
+	  
+	  private function preOrdenRec($nodo){
+	    if($nodo !== null){
+	      echo $nodo->valor . " ";
+	      $this->preOrdenRec($nodo->izquierdo);
+	      $this->preOrdenRec($nodo->derecho);
+	    }
+	  }
+	  
+	  public function postOrden(){
+	    $this->postOrdenRec($this->raiz);
+	    echo PHP_EOL;
+	  }
+	  
+	  private function postOrdenRec($nodo){
+	    if($nodo !== null){
+	      $this->postOrdenRec($nodo->izquierdo);
+	      $this->postOrdenRec($nodo->derecho);
+	      echo $nodo->valor . " ";
+	    }
+	  }
+	}
+	
+	$arbol = new ArbolBinario();
+	$arbol->insertar(50);
+	$arbol->insertar(20);
+	$arbol->insertar(70);
+	$arbol->insertar(30);
+	$arbol->insertar(40);
+	$arbol->insertar(60);
+	$arbol->insertar(80);
+	
+	echo "Recorrido inOrden:\n";
+	$arbol->inOrden();
+	
+	echo "Recorrido preOrden: \n";
+	$arbol->preOrden();
+	
+	echo "Recorrido postOrden:\n";
+	$arbol->postOrden();
+	
+	
+?>
