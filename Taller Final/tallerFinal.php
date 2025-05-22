@@ -184,10 +184,10 @@
 	$arbol = new ArbolBinario();
 	$arbol->insertar("\n0 - Aeropuerto\n");
 	$arbol->insertar("\n1 - Terminal A\n");
-	$arbol->insertar("\n2 - Terminal B\n");
-	$arbol->insertar("\n1.1 - Pista A1\n");
+    $arbol->insertar("\n2 - Terminal B\n");
+    $arbol->insertar("\n1.1 - Pista A1\n");
 	$arbol->insertar("\n1.2 - Pista A2\n");
-	$arbol->insertar("\n2.1 - Pista B1\n");
+    $arbol->insertar("\n2.1 - Pista B1\n");
 	$arbol->insertar("\n2.2 - Pista B2\n");
 	
 	echo "\nOrganizacion Aeropuerto:\n";
